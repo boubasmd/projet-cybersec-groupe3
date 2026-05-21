@@ -1,0 +1,489 @@
+/* ================================================
+   style.css — JobFinder
+   CSS niveau Licence 1
+   Concepts utilisés :
+     - Variables CSS (--nom)
+     - Flexbox (nav, formulaires, boutons)
+     - CSS Grid (grille de cartes)
+     - Sélecteurs de classe et d'élément
+     - Pseudo-classes (:hover, :focus)
+   ================================================ */
+
+
+/* ------------------------------------------------
+   1. VARIABLES CSS
+   On définit les couleurs et valeurs réutilisables
+   dans :root (la racine du document HTML)
+   ------------------------------------------------ */
+:root {
+    --bleu:       #2563eb;   /* couleur principale */
+    --bleu-hover: #1d4ed8;   /* bleu plus foncé au survol */
+    --bleu-clair: #dbeafe;   /* bleu très pâle */
+    --rouge:      #dc2626;   /* couleur danger */
+    --vert:       #16a34a;   /* couleur succès */
+    --fond:       #f8fafc;   /* fond de page */
+    --blanc:      #ffffff;
+    --gris:       #64748b;   /* texte secondaire */
+    --bord:       #e2e8f0;   /* couleur des bordures */
+    --rayon:      8px;       /* arrondi des coins */
+}
+
+
+/* ------------------------------------------------
+   2. RESET BASIQUE
+   Supprime les marges et padding par défaut
+   du navigateur, et applique box-sizing
+   ------------------------------------------------ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* la largeur inclut padding et bordure */
+}
+
+
+/* ------------------------------------------------
+   3. STYLE GÉNÉRAL DU BODY
+   ------------------------------------------------ */
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--fond);
+    color: #1e293b;
+    line-height: 1.6;
+}
+
+a {
+    color: var(--bleu);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
+/* ------------------------------------------------
+   4. BARRE DE NAVIGATION
+   On utilise Flexbox pour aligner les éléments
+   ------------------------------------------------ */
+nav {
+    background-color: var(--blanc);
+    border-bottom: 2px solid var(--bord);
+    padding: 0 1.5rem;
+    height: 60px;
+
+    /* Flexbox : éléments en ligne, espacés */
+    display: flex;
+    align-items: center;            /* centrage vertical */
+    justify-content: space-between; /* logo à gauche, liens à droite */
+
+    /* Reste visible en haut lors du défilement */
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+nav h2 {
+    font-size: 1.3rem;
+    color: var(--bleu);
+    font-weight: bold;
+}
+
+/* Liens du menu : aussi en Flexbox pour les aligner en ligne */
+nav .menu {
+    display: flex;
+    gap: 0.5rem;
+}
+
+nav .menu a {
+    color: var(--gris);
+    padding: 0.4rem 0.8rem;
+    border-radius: var(--rayon);
+    font-size: 0.9rem;
+}
+
+nav .menu a:hover {
+    background-color: var(--bleu-clair);
+    color: var(--bleu);
+    text-decoration: none;
+}
+
+
+/* ------------------------------------------------
+   5. CONTENEUR PRINCIPAL
+   Limite la largeur et centre le contenu
+   ------------------------------------------------ */
+main, .container {
+    max-width: 1100px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+h1 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #0f172a;
+}
+
+
+/* ------------------------------------------------
+   6. GRILLE DE CARTES
+   CSS Grid crée une grille automatique de colonnes
+   ------------------------------------------------ */
+.cards-grid {
+    display: grid;
+
+    /* Colonnes automatiques d'au moins 260px */
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+}
+
+
+/* ------------------------------------------------
+   7. CARTE D'OFFRE
+   ------------------------------------------------ */
+.card {
+    background-color: var(--blanc);
+    border: 1px solid var(--bord);
+    border-radius: var(--rayon);
+    padding: 1.2rem;
+
+    /* Flexbox vertical pour espacer contenu et boutons */
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.card:hover {
+    border-color: var(--bleu);
+    box-shadow: 0 4px 16px rgba(37, 99, 235, 0.1);
+}
+
+.card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: var(--rayon);
+    margin-bottom: 0.5rem;
+}
+
+.card h2 {
+    font-size: 1.1rem;
+    color: #0f172a;
+}
+
+.card p {
+    font-size: 0.9rem;
+    color: var(--gris);
+}
+
+/* Zone des boutons tout en bas de la carte */
+.card-actions {
+    margin-top: auto;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+/* Carte de détail (offre.php) */
+.card.detail {
+    max-width: 700px;
+    margin: 2rem auto;
+    padding: 2rem;
+}
+
+.card.detail h1 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+}
+
+.card.detail p {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: #334155;
+}
+
+
+/* ------------------------------------------------
+   8. BOUTONS
+   ------------------------------------------------ */
+
+/* Bouton principal (postuler) */
+.btn-primary {
+    background-color: var(--bleu);
+    color: var(--blanc);
+    padding: 0.5rem 1rem;
+    border-radius: var(--rayon);
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: inline-block;
+}
+
+.btn-primary:hover {
+    background-color: var(--bleu-hover);
+    text-decoration: none;
+    color: var(--blanc);
+}
+
+/* Bouton secondaire (favoris, voir l'offre) */
+.btn-secondary {
+    background-color: var(--blanc);
+    color: var(--bleu);
+    padding: 0.5rem 1rem;
+    border-radius: var(--rayon);
+    border: 2px solid var(--bleu);
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: inline-block;
+}
+
+.btn-secondary:hover {
+    background-color: var(--bleu-clair);
+    text-decoration: none;
+}
+
+/* Bouton danger (supprimer, abandonner) */
+.btn-danger {
+    background-color: var(--rouge);
+    color: var(--blanc);
+    padding: 0.5rem 1rem;
+    border-radius: var(--rayon);
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: inline-block;
+}
+
+.btn-danger:hover {
+    background-color: #b91c1c;
+    text-decoration: none;
+    color: var(--blanc);
+}
+
+/* Bouton générique dans les formulaires */
+button[type="submit"], button {
+    background-color: var(--bleu);
+    color: var(--blanc);
+    padding: 0.6rem 1.4rem;
+    border: none;
+    border-radius: var(--rayon);
+    cursor: pointer;
+    font-size: 1rem;
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+button[type="submit"]:hover, button:hover {
+    background-color: var(--bleu-hover);
+}
+
+
+/* ------------------------------------------------
+   9. FORMULAIRES (connexion, inscription, profil)
+   ------------------------------------------------ */
+
+/* Conteneur centré pour les pages auth */
+.auth-container {
+    max-width: 420px;
+    margin: 4rem auto;
+    background-color: var(--blanc);
+    border: 1px solid var(--bord);
+    border-radius: var(--rayon);
+    padding: 2rem;
+}
+
+.auth-container h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.auth-container p {
+    text-align: center;
+    margin-top: 1rem;
+    color: var(--gris);
+}
+
+/* Labels et inputs en colonne dans les formulaires */
+label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #334155;
+    margin-top: 1rem;
+    margin-bottom: 0.3rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+select,
+textarea {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--bord);
+    border-radius: var(--rayon);
+    font-size: 0.95rem;
+    background-color: var(--blanc);
+    color: #1e293b;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--bleu);
+    box-shadow: 0 0 0 3px var(--bleu-clair);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Formulaire de filtres (page d'accueil) */
+.filtres {
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+
+.filtres input,
+.filtres select {
+    width: auto;
+    flex: 1;
+    min-width: 150px;
+}
+
+.filtres button {
+    width: auto;
+    margin-top: 0;
+    padding: 0.6rem 1.2rem;
+}
+
+
+/* ------------------------------------------------
+   10. PAGE PROFIL
+   ------------------------------------------------ */
+.profil-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 1rem;
+}
+
+.profil-card {
+    background-color: var(--blanc);
+    border: 1px solid var(--bord);
+    border-radius: var(--rayon);
+    padding: 2rem;
+    width: 100%;
+    max-width: 600px;
+}
+
+.profil-card h1 {
+    margin-bottom: 1.5rem;
+}
+
+.profil-card hr {
+    border: none;
+    border-top: 1px solid var(--bord);
+    margin: 1.5rem 0;
+}
+
+
+/* ------------------------------------------------
+   11. MESSAGES D'ALERTE
+   ------------------------------------------------ */
+.succes {
+    background-color: #dcfce7;
+    color: #166534;
+    border: 1px solid #bbf7d0;
+    padding: 0.8rem 1rem;
+    border-radius: var(--rayon);
+    margin-bottom: 1rem;
+}
+
+.erreur {
+    background-color: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+    padding: 0.8rem 1rem;
+    border-radius: var(--rayon);
+    margin-bottom: 1rem;
+}
+
+.erreurs {
+    background-color: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+    padding: 0.8rem 1rem 0.8rem 2rem;
+    border-radius: var(--rayon);
+    margin-bottom: 1rem;
+}
+
+.erreurs li {
+    margin-bottom: 0.3rem;
+}
+
+
+/* ------------------------------------------------
+   12. ÉLÉMENTS DIVERS
+   ------------------------------------------------ */
+
+/* Lien retour */
+.back {
+    display: inline-block;
+    margin: 1rem 2rem;
+    color: var(--gris);
+    font-size: 0.9rem;
+}
+
+.back:hover {
+    color: var(--bleu);
+}
+
+/* Badge (nombre de candidatures / favoris) */
+.badge {
+    background-color: var(--bleu-clair);
+    color: var(--bleu);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+.stats-bar {
+    margin-bottom: 1rem;
+}
+
+/* Date sur les candidatures */
+.date-badge {
+    font-size: 0.8rem;
+    color: var(--gris);
+    font-style: italic;
+}
+
+/* Quand la liste est vide */
+.vide {
+    text-align: center;
+    padding: 3rem;
+    color: var(--gris);
+}
+
+.vide p {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+/* Formulaire de création / modification d'offre */
+.form-offre {
+    background-color: var(--blanc);
+    border: 1px solid var(--bord);
+    border-radius: var(--rayon);
+    padding: 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
